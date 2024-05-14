@@ -7,6 +7,6 @@
     <p>Ini halaman daftar fakultas</p>
 
     @foreach ($prodi as $item)
-    {{  $item['nama'] }} {{ $item['fakultas']['nama'] }} {{ $item ['fakultas'] ['singkatan'] }}<br>
+    {{  $item['nama'] }} {{ $item['fakultas']['nama'] }} {{ $item ['fakultas']['nama']}}<br>
     @endforeach
 @endsection
