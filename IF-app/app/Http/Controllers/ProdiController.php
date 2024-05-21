@@ -44,7 +44,7 @@ class ProdiController extends Controller
         // simpan ke dalam tabel prodi
         Prodi::create($val);
         // redirect ke prodi
-        return redirect()->route('prodi.index');
+        return redirect()->route('prodi.index')->with('success', $val['nama'] . ' berhasil disimpan');
     }
 
     /**
