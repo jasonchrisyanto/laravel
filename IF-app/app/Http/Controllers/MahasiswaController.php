@@ -6,6 +6,8 @@ use App\Models\Kota;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\File;
 
 class MahasiswaController extends Controller
 {
@@ -14,7 +16,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa = mahasiswa::all(); // Select * from prodi
+        $mahasiswa = mahasiswa::all(); // Select * from mahasiswa
         return view('mahasiswa.index')
                 ->with('mahasiswa', $mahasiswa);
     }
@@ -47,7 +49,7 @@ class MahasiswaController extends Controller
             'alamat' => 'required',
             'prodi_id' => 'required',
             'kota_id' => 'required',
-            'url_foto' => 'required'
+            'url_foto' => '',
         ]);
         // simpan ke dalam tabel mahasiswa
         mahasiswa::create($val);
@@ -85,5 +87,9 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         //
+        File::delete('foto/'.$mahasiswa['url_foto']); // file dihapus
+        $mahasiswa->delete(); // data mahasiswa dihapus
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil dihapus');
+        
     }
 }

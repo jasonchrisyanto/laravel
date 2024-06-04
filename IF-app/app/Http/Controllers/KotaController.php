@@ -12,9 +12,9 @@ class KotaController extends Controller
      */
     public function index()
     {
-        $fakultas = Fakultas::all(); // Select * from fakultas
-        return view('fakultas.index')
-                 ->with('fakultas', $fakultas);
+        $kota = Kota::all(); // Select * from kota
+        return view('kota.index')
+                 ->with('kota', $kota);
     }
 
     /**
@@ -22,7 +22,7 @@ class KotaController extends Controller
      */
     public function create()
     {
-        //
+       return view('kota.create');
     }
 
     /**
@@ -30,7 +30,16 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request)
+
+        // validasi data input
+        $val = $request->validate([
+            'nama' => 'required|unique:kota', 
+        ]);
+        // simpan ke dalam tabel kota
+        Kota::create($val);
+        // redirect ke kota
+        return redirect()->route('kota.index')->with('success', $val['nama'] . ' berhasil disimpan');
     }
 
     /**

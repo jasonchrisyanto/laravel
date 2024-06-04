@@ -39,6 +39,12 @@
             <span class="menu-title">Fakultas</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('kota') }}">
+            <i class="mdi mdi-view-quilt menu-icon"></i>
+            <span class="menu-title">Kota</span>
+          </a>
+        </li>
          <li class="nav-item">
           <a class="nav-link" href="{{ url('prodi') }}">
             <i class="mdi mdi-view-quilt menu-icon"></i>
@@ -328,7 +334,45 @@
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <script src="{{ url('js/dashboard.js') }}"></script>
-  <!-- End custom js for this page-->
+   {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    {{-- swal success --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+    <script>
+      Swal.fire({
+      title: "Good job!",
+      text: "{{ session('success') }}",
+      icon: "success"
+    });
+    </script>
+  @endif
+
+  {{-- swal confirm dialog --}}
+<script type="text/javascript">
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal.fire({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "",
+              confirmButtonText: "Ya, hapus!"
+          })
+          .then((result) => {
+            if (result.isConfirm) {
+              form.submit();
+            }
+          });
+      });
+
+  <<!-- End custom js for this page-->>
+
 </body>
 
 </html>
