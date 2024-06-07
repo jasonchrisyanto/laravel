@@ -28,6 +28,7 @@
                             <td>{{  $item['nama'] }} </td>
                             <td>{{ $item['fakultas']['nama'] }} </td> <br>
                         </tr>
+                        <a href="{{ url('mahasiswa/create') }}" class="btn btn-dark btn-rounded btn-fw">Edit</a>
                         @endforeach
                       </tbody>
                     </table>
